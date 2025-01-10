@@ -4,10 +4,11 @@
   "info": {
     "singularName": "author",
     "pluralName": "authors",
-    "displayName": "Author"
+    "displayName": "Author",
+    "description": "Create authors for your content"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -15,23 +16,23 @@
       "type": "string"
     },
     "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
+        "videos"
+      ]
     },
     "email": {
       "type": "string"
     },
-    "blogs": {
+    "articles": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::blog.blog",
-      "mappedBy": "author"
+      "target": "api::article.article",
+      "mappedBy": "authorsBio"
     }
   }
 }

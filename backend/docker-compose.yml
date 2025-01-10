@@ -1,0 +1,26 @@
+version: "3"
+services:
+  strapi:
+    container_name: strapi
+    build:
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: sqlite
+      DATABASE_NAME: /opt/app/data/db.sqlite
+      DATABASE_PORT: 5432
+      JWT_SECRET: ${JWT_SECRET}
+      NODE_ENV: development
+    volumes:
+      - ./public:/opt/app/public
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./data:/opt/app/data
+    ports:
+      - "1337:1337"
+
+volumes:
+  strapi_uploads:
