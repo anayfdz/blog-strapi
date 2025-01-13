@@ -15,4 +15,4 @@ RUN chown -R node:node /opt/app
 USER node
 RUN yarn build
 EXPOSE 1337
-CMD ["sh", "-c", "yarn start --port $PORT"]
+CMD ["yarn", "start"]
