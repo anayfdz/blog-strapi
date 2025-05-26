@@ -8,22 +8,37 @@ on:
 
 jobs:
 
-  build:
+    build-and-push:
+     runs-on: ubuntu-latest
+     permissions:
+      contents: read
+      packages: write 
 
-    runs-on: ubuntu-latest
-
-    steps:
+     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        with: 
+         driver-opts: network=host
 
       - name: Log in to GitHub Container Registry
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        uses: docker/login-action@v2
+        with: 
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}/my-image:latest .
-
-      - name: Push the Docker image
-        run: docker push ghcr.io/${{ github.repository }}/my-image:latest
+        uses: docker/build-push-action@v3
+        with: 
+         context: .
+         push: ${{ github.event_name != 'pull_request' }}
+         tags: |
+            ghcr.io/${{ github.repository_owner }}/my-image:latest
+            ghcr.io/${{ github.repository_owner }}/my-image:${{ github.sha }}
+         cache-from: type=gha
+         cache-to: type=gha,mode=max
+         build-args: |
+            NODE_ENV=production
