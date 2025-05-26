@@ -13,10 +13,10 @@ ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY . .
 
-ENV DATABASE_CLIENT=sqlite
-ENV DATABASE_FILENAME=/data/sqlite/data.db
+ENV DATABASE_CLIENT=postgres
+ENV DATABASE_FILENAME=/data/postgres/data.db
 
-RUN mkdir -p /data/sqlite && \
+RUN mkdir -p /data/postgres && \
     chown -R node:node /data && \
     chown -R node:node /opt/app
     

@@ -7,8 +7,8 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      DATABASE_CLIENT: sqlite
-      DATABASE_NAME: /opt/app/data/db.sqlite
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: /opt/app/data/db.postgres
       DATABASE_PORT: 5432
       JWT_SECRET: ${JWT_SECRET}
       NODE_ENV: development
