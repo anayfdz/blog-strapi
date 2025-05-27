@@ -4,7 +4,7 @@ export default ({ env }) => ({
     connection: {
       connectionString: env('DATABASE_URL'),
       ssl: { 
-        rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', false) // Neon requiere esto
+        rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', false)
       }
     },
     pool: {
