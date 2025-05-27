@@ -8,8 +8,8 @@ export default ({ env }) => ({
       }
     },
     pool: {
-      min: env.int('DATABASE_POOL_MIN', 0),
-      max: env.int('DATABASE_POOL_MAX', 5),
+      min: env.int('DATABASE_POOL_MIN', 1),
+      max: env.int('DATABASE_POOL_MAX', 3),
       acquireTimeoutMillis: env.int('DATABASE_ACQUIRE_TIMEOUT', 60000)
     },
     acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000)
